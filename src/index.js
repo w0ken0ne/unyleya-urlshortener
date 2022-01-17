@@ -12,3 +12,15 @@ app.use(express.json());
 app.get("/", (req, res) => {
   return res.status(200).send({ message: "Welcome to the API" });
 });
+
+app.post("/shorten", (req, res) => {
+  console.log(req.body);
+  const { url } = req.body;
+  //todo make short url from seed url
+
+  //todo assemble object
+
+  //todo persist on mongo
+
+  return res.status(200).send({ url: url });
+});
