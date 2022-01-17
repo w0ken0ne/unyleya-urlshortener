@@ -1,11 +1,17 @@
 const mongoose = require("mongoose");
+require("dotenv").config({ path: "../.env" });
+const connectDB = async () => {
+  console.log(`THERE IT IS: ${process.env.MONGODB_URI} -- ${Date.now()}`);
+  try {
+    mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB Conectado...");
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
 
-const DB_URI =
-  "mongodb+srv://wsadevv:$secad03@cluster0.djwok.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-mongoose.connect(DB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const connection = mongoose.connection;
-module.exports = connection;
+module.exports = connectDB;
