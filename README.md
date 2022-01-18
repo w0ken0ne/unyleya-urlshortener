@@ -15,10 +15,10 @@ Os encurtadores de URL são recursos práticos quando desejamos compartilhar um 
 ## Rotas
 
 - GET /
-- GET /api-docs
-- GET /short/{id}
-- POST /short
-- GET /shortenedAt/{date}
+- GET _/api-docs_
+- GET _/short/{id}_
+- POST _/short_
+- GET _/shortenedAt/{date}_
 
 ## Dados da entrega
 
