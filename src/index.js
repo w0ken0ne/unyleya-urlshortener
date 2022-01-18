@@ -14,16 +14,15 @@ const { endOfDay, parseISO, format, startOfDay } = require("date-fns");
 //configure app port
 connectDB();
 
-//configure swagger endpoint
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-//configure cors
-app.use(cors());
 app.listen(process.env.PORT || 3000, () => {
   console.log("API is Up and Running mate! Ahoy!");
 });
 //configure app to use json
 app.use(express.json());
+//configure swagger endpoint
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+//configure cors
+app.use(cors());
 
 app.get("/", (req, res) => {
   return res.status(200).send({ message: "Welcome to the API" });
