@@ -5,6 +5,7 @@ const connectDB = require("./data/db.config");
 const app = express();
 const utils = require("./utils/utils");
 const Url = require("./data/models/url");
+const { isEqual, toDate, parseISO, format } = require("date-fns");
 //configure app port
 const port = process.env.PORT || 3000;
 connectDB();
@@ -59,11 +60,34 @@ app.get("/short/:id", async (req, res) => {
     if (exists) {
       return res.status(200).send({
         message: "URL found",
-        url: exists.seedUrl,
+        url: exists.shortUrl,
       });
     } else {
       return res.status(404).send({
         message: "URL not found in database",
+      });
+    }
+  } catch (e) {}
+});
+app.get("/shortenedAt/:date", async (req, res) => {
+  const { date } = req.params;
+  const splitted = date.split("-");
+  const year = splitted[0];
+  const month = splitted[1];
+  const day = splitted[2];
+
+  console.log(date);
+  try {
+    let exists = await Url.find({ createdAt: date }).exec();
+    console.log(exists);
+    if (exists) {
+      return res.status(200).send({
+        message: `URLs shortened at ${date}`,
+        urls: exists,
+      });
+    } else {
+      return res.status(404).send({
+        message: "URLs not found in database",
       });
     }
   } catch (e) {}
