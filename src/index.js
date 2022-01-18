@@ -55,7 +55,6 @@ app.get("/short/:id", async (req, res) => {
   const { id } = req.params;
   try {
     let exists = await Url.findOne({ urlId: id }).exec();
-    console.log(exists);
     if (exists) {
       return res.status(200).send({
         message: "URL found",
