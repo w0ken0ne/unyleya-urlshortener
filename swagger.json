@@ -1,0 +1,18 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Encurtador de Links",
+    "description": "API Criada para a disciplina Desenvolvimento Back-End para Aplicações Mobile da Pós Unyleya ",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [{
+    "name": "shortener",
+    "description": "Operações relacionadas aos links"
+    
+  }],
+  "schemes" : ["http"],
+  "consumes" : ["application/json"],
+  "produces" : ["application/json"]
+}

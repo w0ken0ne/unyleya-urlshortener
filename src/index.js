@@ -2,6 +2,11 @@
 const express = require("express");
 const shortid = require("shortid");
 const connectDB = require("./data/db.config");
+
+//configure swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../swagger.json");
+
 const app = express();
 const utils = require("./utils/utils");
 const Url = require("./data/models/url");
@@ -9,6 +14,9 @@ const { endOfDay, parseISO, format, startOfDay } = require("date-fns");
 //configure app port
 const port = process.env.PORT || 3000;
 connectDB();
+
+//configure swagger endpoint
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
   console.log("API is Up and Running mate! Ahoy!");
@@ -47,7 +55,9 @@ app.post("/short", async (req, res) => {
           shortUrl: shortUrl,
         });
       }
-    } catch (e) {}
+    } catch (e) {
+      throw new Error(e);
+    }
   }
 });
 
@@ -66,7 +76,9 @@ app.get("/short/:id", async (req, res) => {
         message: "URL not found in database",
       });
     }
-  } catch (e) {}
+  } catch (e) {
+    throw new Error(e);
+  }
 });
 app.get("/shortenedAt/:date", async (req, res) => {
   const { date } = req.params;
@@ -87,5 +99,7 @@ app.get("/shortenedAt/:date", async (req, res) => {
         message: "URLs not found in database",
       });
     }
-  } catch (e) {}
+  } catch (e) {
+    throw new Error(e);
+  }
 });
