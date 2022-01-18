@@ -12,7 +12,6 @@ const utils = require("./utils/utils");
 const Url = require("./data/models/url");
 const { endOfDay, parseISO, format, startOfDay } = require("date-fns");
 //configure app port
-const port = process.env.PORT || 3000;
 connectDB();
 
 //configure swagger endpoint
@@ -20,7 +19,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //configure cors
 app.use(cors());
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("API is Up and Running mate! Ahoy!");
 });
 //configure app to use json
