@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config();
+console.log(process.env.MONGODB_URI);
 const connectDB = async () => {
-  console.log(`THERE IT IS: ${process.env.MONGODB_URI} -- ${Date.now()}`);
   try {
     mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
