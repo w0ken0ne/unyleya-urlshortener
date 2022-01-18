@@ -39,7 +39,7 @@ app.post("/short", async (req, res) => {
       if (exists) {
         return res.status(200).send({
           message: "URL already exists",
-          urlId: exists.url,
+          urlId: exists.shortUrl,
         });
       } else {
         const shortUrl = `${urlId}`;

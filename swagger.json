@@ -76,8 +76,50 @@
             }
           }
         }
+      },
+      "/short/{url}": {
+        "post": {
+          "tags": [
+            "shortener"
+          ],
+          "summary": "Encurta o link",
+          "description": "Encurta o link",
+          "operationId": "postShort",
+          "parameters": [
+            {
+              "name": "url",
+              "in": "path",
+              "description": "Link a ser encurtado",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "schema": {
+                 "message": "string",
+                "urlId": "string",
+                "shortUrl": "string"
+              }
+            },
+            "204": {
+              "description":"URL já encurtada",
+              "schema":{
+                "message": "string",
+                "urlId": "string"
+              }
+            },
+            "400": {
+              "description": "Erro",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
       }
-      }
+  }
     
   
 }
