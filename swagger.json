@@ -77,7 +77,7 @@
           }
         }
       },
-      "/short/{url}": {
+      "/short": {
         "post": {
           "tags": [
             "shortener"
@@ -85,13 +85,14 @@
           "summary": "Encurta o link",
           "description": "Encurta o link",
           "operationId": "postShort",
+          "consumes": ["application/json"],
           "parameters": [
             {
               "name": "url",
-              "in": "path",
+              "in": "body",
               "description": "Link a ser encurtado",
               "required": true,
-              "type": "string"
+              "type": "object"
             }
           ],
           "responses": {
@@ -99,15 +100,24 @@
               "description": "Sucesso",
               "schema": {
                  "message": "string",
-                "urlId": "string",
-                "shortUrl": "string"
+                 "urlId": "string",
+                 "shortUrl": "string"
+              },
+              "properties": {
+                "url" : "string"
               }
             },
-            "204": {
+            "201": {
               "description":"URL já encurtada",
               "schema":{
                 "message": "string",
                 "urlId": "string"
+              }
+            },
+            "404": {
+              "description":"Not found",
+              "schema":{
+                "message": "string"
               }
             },
             "400": {

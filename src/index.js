@@ -37,7 +37,7 @@ app.post("/short", async (req, res) => {
     try {
       let exists = await Url.findOne({ seedUrl: url }).exec();
       if (exists) {
-        return res.status(200).send({
+        return res.status(201).send({
           message: "URL already exists",
           urlId: exists.shortUrl,
         });
