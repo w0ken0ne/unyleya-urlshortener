@@ -14,5 +14,70 @@
   }],
   "schemes" : ["http"],
   "consumes" : ["application/json"],
-  "produces" : ["application/json"]
+  "produces" : ["application/json"],
+  
+    "paths": {
+      "/": {
+        "get": {
+          "tags": [
+            "shortener"
+          ],
+          "summary": "Retorna a página inicial",
+          "description": "Retorna a página inicial",
+          "operationId": "getHome",
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "schema": {
+                "type": "string"
+              }
+            },
+            "400": {
+              "description": "Erro",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      
+      },
+      "/short/{id}": {
+        "get": {
+          "tags": [
+            "shortener"
+          ],
+          "summary": "Retorna o link encurtado",
+          "description": "Retorna o link encurtado",
+          "operationId": "getShort",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID do link encurtado",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "schema": {
+                "message": "string",
+                "shortUrl": "string",
+                "seedUrl": "string"
+              }
+            },
+            "400": {
+              "description": "Erro",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+      }
+    
+  
 }

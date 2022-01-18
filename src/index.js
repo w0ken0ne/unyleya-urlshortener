@@ -2,7 +2,7 @@
 const express = require("express");
 const shortid = require("shortid");
 const connectDB = require("./data/db.config");
-
+const cors = require("cors");
 //configure swagger
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
@@ -18,6 +18,8 @@ connectDB();
 //configure swagger endpoint
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+//configure cors
+app.use(cors());
 app.listen(port, () => {
   console.log("API is Up and Running mate! Ahoy!");
 });
@@ -40,8 +42,7 @@ app.post("/short", async (req, res) => {
           urlId: exists.url,
         });
       } else {
-        const shortUrl = `${process.env.BASE_URL}/${urlId}`;
-        console.log(shortUrl);
+        const shortUrl = `${urlId}`;
         exists = Url({
           seedUrl: url,
           shortUrl,
