@@ -13,6 +13,9 @@ const URLSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  urlId: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Url", URLSchema);
