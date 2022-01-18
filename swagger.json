@@ -128,6 +128,42 @@
             }
           }
         }
+      },
+      "/shortenedAt/{date}": {
+        "get": {
+          "tags": [
+            "shortener"
+          ],
+          "summary": "Retorna os links encurtados por data",
+          "description": "Retorna os links encurtados por data",
+          "operationId": "getShortenedAt",
+          "parameters": [
+            {
+              "name": "date",
+              "in": "path",
+              "description": "Data do link encurtado",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "schema": {
+                "message" : "string",
+                "urls": [
+                  {"_id":"string","seedUrl":"string","shortUrl":"string","createdAt":"string","urlId":"string","__v":"number"}
+                ]
+              }
+            },
+            "404": {
+              "description": "Erro",
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        }
       }
   }
     
