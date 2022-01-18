@@ -5,7 +5,7 @@ const connectDB = require("./data/db.config");
 const app = express();
 const utils = require("./utils/utils");
 const Url = require("./data/models/url");
-const { isEqual, toDate, parseISO, format } = require("date-fns");
+const { endOfDay, parseISO, format, startOfDay } = require("date-fns");
 //configure app port
 const port = process.env.PORT || 3000;
 connectDB();
@@ -26,7 +26,6 @@ app.post("/short", async (req, res) => {
   if (utils.validateUrl(url)) {
     try {
       let exists = await Url.findOne({ seedUrl: url }).exec();
-      console.log(exists);
       if (exists) {
         return res.status(200).send({
           message: "URL already exists",
@@ -60,7 +59,8 @@ app.get("/short/:id", async (req, res) => {
     if (exists) {
       return res.status(200).send({
         message: "URL found",
-        url: exists.shortUrl,
+        shortUrl: exists.shortUrl,
+        seedUrl: exists.seedUrl,
       });
     } else {
       return res.status(404).send({
@@ -71,15 +71,13 @@ app.get("/short/:id", async (req, res) => {
 });
 app.get("/shortenedAt/:date", async (req, res) => {
   const { date } = req.params;
-  const splitted = date.split("-");
-  const year = splitted[0];
-  const month = splitted[1];
-  const day = splitted[2];
-
-  console.log(date);
   try {
-    let exists = await Url.find({ createdAt: date }).exec();
-    console.log(exists);
+    let exists = await Url.find({
+      createdAt: {
+        $gte: startOfDay(parseISO(date)),
+        $lte: endOfDay(parseISO(date)),
+      },
+    }).exec();
     if (exists) {
       return res.status(200).send({
         message: `URLs shortened at ${date}`,
