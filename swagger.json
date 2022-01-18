@@ -47,8 +47,8 @@
           "tags": [
             "shortener"
           ],
-          "summary": "Retorna o link encurtado",
-          "description": "Retorna o link encurtado",
+          "summary": "Buscar link a partir do ID",
+          "description": "Retorna o link encurtado a partir do ID fornecido",
           "operationId": "getShort",
           "parameters": [
             {
@@ -82,8 +82,8 @@
           "tags": [
             "shortener"
           ],
-          "summary": "Encurta o link",
-          "description": "Encurta o link",
+          "summary": "Encurtar o link",
+          "description": "Encurta o link fornecido no body ",
           "operationId": "postShort",
           "consumes": ["application/json"],
           "parameters": [
@@ -92,7 +92,11 @@
               "in": "body",
               "description": "Link a ser encurtado",
               "required": true,
-              "type": "object"
+              "type": "object",
+              "default": {
+                "url": "http://www.google.com"
+              }
+              
             }
           ],
           "responses": {
@@ -135,7 +139,7 @@
             "shortener"
           ],
           "summary": "Retorna os links encurtados por data",
-          "description": "Retorna os links encurtados por data",
+          "description": "Retorna os links encurtados por data no formato YYYY-MM-DD",
           "operationId": "getShortenedAt",
           "parameters": [
             {
@@ -143,7 +147,8 @@
               "in": "path",
               "description": "Data do link encurtado",
               "required": true,
-              "type": "string"
+              "type": "string",
+              "default": "2022-01-18"
             }
           ],
           "responses": {
